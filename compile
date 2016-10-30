@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+file="program.hs"
+file="${file%.*}"
+src_dir="./src"
+target_dir="./target"
+
+if [[ ! -e $target_dir ]]; then
+  mkdir -p $target_dir
+elif [[ ! -d $target_dir ]]; then
+  echo "$target_dir already exists but is not a directory" 1>&2
+fi
+
+#ghc -rtsopts --make -O2 "$src_dir/$file" -o "$target_dir/$file"
+ghc -rtsopts -prof -auto-all -caf-all -fforce-recomp --make -O2 "$src_dir/$file" -o "$target_dir/$file"
+
+rm "$src_dir/$file.o" "$src_dir/$file.hi"

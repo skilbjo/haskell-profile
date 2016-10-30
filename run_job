@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+file="program.hs"
+file="${file%.*}"
+src_dir="./src"
+target_dir="./target"
+
+"./$target_dir/$file" $1 $2 $3 $4 $5 $6
